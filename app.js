@@ -5,7 +5,7 @@ const knex                 = require('knex')(config.database.development);
 const nunjuck              = require('./nunjucks.provider');
 const routerLogin          = require('./router/RouterLogin');
 const routeAdmin           = require('./router/RouterAdmin');
-const staticFile           = require('koa-static');
+const loadStaticFile       = require('koa-static');
 const path                 = require('path');
 const bodyParser           = require('koa-bodyparser');
 const session              = require('koa-session');
@@ -39,7 +39,7 @@ const app = new Koa();
 
 app.keys = ['some-secret-key'];
 
-app.use(staticFile(path.join(__dirname, '/views/Admin')));
+app.use(loadStaticFile(path.join(__dirname, '/views/Admin')));
 
 app.use(session(app));
 app.use(hasherProvider(10));
