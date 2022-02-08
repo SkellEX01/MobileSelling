@@ -5,7 +5,7 @@ const knex                 = require('knex')(config.database.development);
 const nunjuck              = require('./nunjucks.provider');
 const routerLogin          = require('./router/RouterLogin');
 const routeAdmin           = require('./router/RouterAdmin');
-const serve                = require('koa-static');
+const staticFile           = require('koa-static');
 const path                 = require('path');
 const bodyParser           = require('koa-bodyparser');
 const session              = require('koa-session');
@@ -40,9 +40,7 @@ const app = new Koa();
 
 app.keys = ['some-secret-key'];
 
-app.use(serve(
-    path.join(__dirname, staticPath)
-));
+app.use(staticFile(path.join(__dirname, staticPath)));
 
 app.use(session(app));
 app.use(hasherProvider(10));
@@ -59,10 +57,10 @@ app.use(customerProvider(knex));
 app.use(mailerProvider(config.mail));
 app.use(authProvider());
 app.use(braintreeProvider({
-    sandbox: true,
-    merchantId: process.env.BRAINTREE_MERCHANT_ID,
-    publicKey: process.env.BRAINTREE_PUBLIC_KEY,
-    privateKey: process.env.BRAINTREE_PRIVATE_KEY
+    sandbox     : true,
+    merchantId  : process.env.BRAINTREE_MERCHANT_ID,
+    publicKey   : process.env.BRAINTREE_PUBLIC_KEY,
+    privateKey  : process.env.BRAINTREE_PRIVATE_KEY
 }));
 app.use(routerLogin.routes());
 app.use(routerDashboard.routes());
@@ -79,6 +77,4 @@ app.use(routerRemoveCart.routes());
 app.use(routerCheckout.routes());
 app.use(routerSuccess.routes());
 
-app.listen(process.env.PORT, () => {
-    console.log('Server listen port ' + process.env.PORT)
-});
+app.listen(process.env.PORT, () => console.log(`Server listen port ${process.env.PORT}`));
