@@ -77,4 +77,4 @@ app.use(routerRemoveCart.routes());
 app.use(routerCheckout.routes());
 app.use(routerSuccess.routes());
 
-app.listen(process.env.PORT, () => console.log(`Server listen port ${process.env.PORT}`));
+app.listen(process.env.PORT || 3000, () => console.log(`Server listen port ${process.env.PORT || 3000}`));
