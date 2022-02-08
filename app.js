@@ -9,7 +9,6 @@ const staticFile           = require('koa-static');
 const path                 = require('path');
 const bodyParser           = require('koa-bodyparser');
 const session              = require('koa-session');
-const staticPath           = '/views/Admin';
 
 const authProvider         = require('./auth/Auth.Provider');
 const userProvider         = require('./user/UserProvider');
@@ -40,7 +39,7 @@ const app = new Koa();
 
 app.keys = ['some-secret-key'];
 
-app.use(staticFile(path.join(__dirname, staticPath)));
+app.use(staticFile(path.join(__dirname, '/views/Admin')));
 
 app.use(session(app));
 app.use(hasherProvider(10));
