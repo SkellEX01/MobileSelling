@@ -1,46 +1,16 @@
-class Product {
-    constructor(id, id_type, id_promotion, name, price, warranty, image, description) {
-        this.id          = id;
-        this.id_type     = id_type;
-        this.id_promotion= id_promotion;
-        this.name        = name;
-        this.price       = price;
-        this.warranty    = warranty;
-        this.image       = image;
-        this.description = description;
-    }
-
-    getId() {
-        return this.id;
-    }
-
-    getIdType() {
-        return this.id_type;
-    }
-
-    getIdPromotion() {
-        return this.id_promotion;
-    }
-
-    getName() {
-        return this.name;
-    }
-
-    getPrice() {
-        return this.price;
-    }
-
-    getWarranty() {
-        return this.warranty;
-    }
-
-    getImage() {
-        return this.image;
-    }
-
-    getDescription() {
-        return this.description;
-    }
+class Product 
+{
+    constructor(product) 
+    {
+        this.id           = product.id;
+        this.id_type      = product.id_type;
+        this.id_promotion = product.id_promotion;
+        this.name         = product.name;
+        this.price        = product.price;
+        this.warranty     = product.warranty;
+        this.image        = product.image;
+        this.description  = product.description;
+    }  
 }
 
 module.exports = Product;
