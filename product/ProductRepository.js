@@ -69,7 +69,7 @@ class ProductRepository
         return deleteProduct;
     }
     
-    function factory(product)
+    factory(product)
     {
         return new Product(product);
     }
