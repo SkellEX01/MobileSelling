@@ -1,27 +1,12 @@
-class Category { 
-    constructor(id, name, description, status) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.status = status;
+class Category 
+{ 
+    constructor(category) 
+    {
+        this.id          = category.id;
+        this.name        = category.name;
+        this.description = category.description;
+        this.status      = category.status;
     }
-
-    getId() {
-        return this.id;
-    }
-
-    getName() {
-        return this.name;
-    }
-
-    getDescription() {
-        return this.description;
-    }
-
-    getStatus() {
-        return this.status;
-    }
-
 }
 
 module.exports = Category;
