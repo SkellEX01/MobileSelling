@@ -10,7 +10,7 @@ class ProductRepository
     async getAll() 
     {
         let products = await this.knex('Type_product').join('Product', 'Type_product.id', '=', 'Product.id_type');
-        return products.map(allProduct => this.factoryProduct(allProduct));
+        return products.map(product => this.factoryProduct(product));
     }
 
     async findProductById(id) 
@@ -71,8 +71,18 @@ class ProductRepository
     
     factoryProduct(allProductData) 
     {
-        return new Product(allProductData.id, allProductData.id_type, allProductData.id_promotion, allProductData.name, allProductData.price, allProductData.warranty, allProductData.image, allProductData.description);
+       return new Product(
+           product.id,
+           product.id_type,
+           product.id_promotion,
+           product.name,
+           product.price,
+           product.warranty,
+           product.image,
+           product.description
+       );
     }
+    
 }
 
 module.exports = ProductRepository;
