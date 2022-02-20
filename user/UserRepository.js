@@ -22,12 +22,7 @@ class UserRepository
     async getById(id) 
     {
         let user = await this.knex.select('*').from('Admin').where('id', id);
-
-        if(user.length) {
-            return this.factory(user[0]);
-        } 
-
-        return null;
+        return user.length ? this.factory(user[0]) : null;
     }
 
     factory(user) 
