@@ -1,26 +1,31 @@
 const Customer = require('./Customer');
 
-class CustomerRepository {
-    constructor(knex) {
+class CustomerRepository 
+{
+    constructor(knex) 
+    {
         this.knex = knex;
     }
 
-    async getAll() {
-        let customerList = await this.knex.select('*').from('Customer');
-        return customerList.map(allCustomer => this.factoryCustomer(allCustomer));
+    async getAll() 
+    {
+        let customers = await this.knex.select('*').from('Customer');
+        return customers.map(customer => this.factory(customer));
     }
 
-    async add(data) {
+    async add(data) 
+    {
         let addInfoCustomer = await this.knex('Customer').insert(data);
 
-        return this.factoryCustomer({
+        return this.factory({
             ...data,
             id: addInfoCustomer[0].id
         });
     }
 
-    factoryCustomer(allCustomerData) {
-        return new Customer(allCustomerData.id, allCustomerData.gender, allCustomerData.name, allCustomerData.email, allCustomerData.address, allCustomerData.phone, allCustomerData.note);
+    factory(customer) 
+    {
+        return new Customer(customer);
     }
 }
 
