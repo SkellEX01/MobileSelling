@@ -15,16 +15,16 @@ class UserRepository
 
     async findByUsername(username) 
     {
-        let [rawUser] = await this.knex.select('*').from('Admin').where('username', username);
-        return !!rawUser ? this.factory(rawUser) : null;
+        let [user] = await this.knex.select('*').from('Admin').where('username', username);
+        return !!user ? this.factory(user) : null;
     }
 
     async getById(id) 
     {
-        let rawUser = await this.knex.select('*').from('Admin').where('id', id);
+        let user = await this.knex.select('*').from('Admin').where('id', id);
 
-        if(rawUser.length) {
-            return this.factory(rawUser[0]);
+        if(user.length) {
+            return this.factory(user[0]);
         } 
 
         return null;
