@@ -9,8 +9,8 @@ class ProductRepository
 
     async getAll() 
     {
-        let productList = await this.knex('Type_product').join('Product', 'Type_product.id', '=', 'Product.id_type');
-        return productList.map(allProduct => this.factoryProduct(allProduct));
+        let products = await this.knex('Type_product').join('Product', 'Type_product.id', '=', 'Product.id_type');
+        return products.map(allProduct => this.factoryProduct(allProduct));
     }
 
     async findProductById(id) 
