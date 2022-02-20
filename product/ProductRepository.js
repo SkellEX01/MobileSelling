@@ -10,7 +10,7 @@ class ProductRepository
     async getAll() 
     {
         let products = await this.knex('Type_product').join('Product', 'Type_product.id', '=', 'Product.id_type');
-        return products.map(product => this.factoryProduct(product));
+        return products.map(product => factory(product));
     }
 
     async findProductById(id) 
@@ -18,7 +18,7 @@ class ProductRepository
         let rawProduct = await this.knex.select('*').from('Product').where('id', id);
         
         if(rawProduct.length) {
-            return this.factoryProduct(rawProduct[0]);
+            return this.factory(rawProduct[0]);
         } 
 
         return null;
@@ -28,26 +28,26 @@ class ProductRepository
     async findProductGroupBy(groupById)
     {
         let groupProduct = await this.knex.select('*').from('Product').whereIn('id', groupById);
-        return groupProduct.map(allProduct => this.factoryProduct(allProduct));
+        return groupProduct.map(allProduct => this.factory(allProduct));
     }
 
     async findProductByName(name) 
     {
         let rawProduct = await this.knex.select('*').from('Product').where('name', 'like', '%'+name+'%');
-        return rawProduct.map(allProduct => this.factoryProduct(allProduct));
+        return rawProduct.map(allProduct => this.factory(allProduct));
 
     }
 
     async findPriceProductGroupBy(groupById) 
     {
         let groupPrice = await this.knex.from('Product').whereIn('id', groupById);
-        return groupPrice.map(allProduct => this.factoryProduct(allProduct));
+        return groupPrice.map(allProduct => this.factory(allProduct));
     }
 
     async findProductByIdType(id) 
     {
         let rawProduct = await this.knex.select('*').from('Product').where('id_type', id);
-        return rawProduct.map(allProduct => this.factoryProduct(allProduct));
+        return rawProduct.map(allProduct => this.factory(allProduct));
 
     }
 
@@ -69,18 +69,9 @@ class ProductRepository
         return deleteProduct;
     }
     
-    factoryProduct(allProductData) 
+    function factory(product)
     {
-       return new Product(
-           product.id,
-           product.id_type,
-           product.id_promotion,
-           product.name,
-           product.price,
-           product.warranty,
-           product.image,
-           product.description
-       );
+        return new Product(product);
     }
     
 }
