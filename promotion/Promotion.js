@@ -1,20 +1,10 @@
-class Promotion {
-    constructor(id, name, content) {
-        this.id         = id;
-        this.name       = name;
-        this.content    = content;
-    }
-
-    getId() {
-        return this.id;
-    }
-
-    getName() {
-        return this.name;
-    }
-
-    getContent() {
-        return this.content;
+class Promotion 
+{
+    constructor(promotion) 
+    {
+        this.id         = promotion.id;
+        this.name       = promotion.name;
+        this.content    = promotion.content;
     }
 }
 
