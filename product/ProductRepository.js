@@ -15,14 +15,8 @@ class ProductRepository
 
     async findProductById(id) 
     {
-        let rawProduct = await this.knex.select('*').from('Product').where('id', id);
-        
-        if(rawProduct.length) {
-            return this.factory(rawProduct[0]);
-        } 
-
-        return null;
-
+        let product = await this.knex.select('*').from('Product').where('id', id);
+        return product.length ? this.factory(product[0]) : null;
     }
 
     async findProductGroupBy(groupById)
@@ -33,8 +27,8 @@ class ProductRepository
 
     async findProductByName(name) 
     {
-        let rawProduct = await this.knex.select('*').from('Product').where('name', 'like', '%'+name+'%');
-        return rawProduct.map(allProduct => this.factory(allProduct));
+        let products = await this.knex.select('*').from('Product').where('name', 'like', '%'+name+'%');
+        return products.map(product => this.factory(product));
 
     }
 
@@ -46,27 +40,24 @@ class ProductRepository
 
     async findProductByIdType(id) 
     {
-        let rawProduct = await this.knex.select('*').from('Product').where('id_type', id);
-        return rawProduct.map(allProduct => this.factory(allProduct));
+        let products = await this.knex.select('*').from('Product').where('id_type', id);
+        return products.map(product => this.factory(product));
 
     }
 
     async add(data) 
     {
-        let addProduct = await this.knex('Product').insert(data);
-        return addProduct;
+        return await this.knex('Product').insert(data);
     }
 
     async update(data, id) 
     {
-        let updateProduct = await this.knex('Product').where('id', id).update(data);
-        return updateProduct;
+        return await this.knex('Product').where('id', id).update(data);
     }
 
     async delete(id) 
     {
-        let deleteProduct = await this.knex('Product').where('id', id).del();
-        return deleteProduct;
+        return await this.knex('Product').where('id', id).del();
     }
     
     factory(product)
