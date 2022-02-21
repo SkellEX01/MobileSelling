@@ -16,15 +16,12 @@ class BillRepository
     async getIdBill() 
     {
         let id = await this.knex.select('id').from('Bills').orderBy('id', 'desc');
-        if(id.length) {
-            return this.factoryCustomer(id[0]);
-        }
+        return id.length ? this.factoryCustomer(id[0]) : null;
     }
 
     async add(bill) 
     {
-        let addBill = await this.knex('Bills').insert(bill);
-        return addBill;
+        return await this.knex('Bills').insert(bill);
     }
 
     factory(bill) 
