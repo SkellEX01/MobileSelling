@@ -15,31 +15,23 @@ class PromotionRepository
 
     async findPromotionById(id) 
     {
-        let rawPromotion = await this.knex.select('*').from('Promotion').where('id', id);
-
-        if(rawPromotion.length) {
-            return this.factory(rawPromotion[0]);
-        }
-
-        return null;
+        let promotion = await this.knex.select('*').from('Promotion').where('id', id);
+        return promotion.length ? this.factory(promotion[0]) : null;
     }
 
     async add(data) 
     {
-        let addPromotion = await this.knex('Promotion').insert(data);
-        return addPromotion;
+        return await this.knex('Promotion').insert(data);
     }
 
     async update(data, id) 
     {
-        let updatePromotion = await this.knex('Promotion').where('id', id).update(data);
-        return updatePromotion;
+        return await this.knex('Promotion').where('id', id).update(data);
     }
 
     async delete(id) 
     {
-        let deletePromotion = await this.knex('Promotion').where('id', id).del();
-        return deletePromotion;
+        return await this.knex('Promotion').where('id', id).del();
     }
 
     factory(promotion) 
