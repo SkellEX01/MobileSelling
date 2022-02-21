@@ -15,31 +15,23 @@ class CategoryRepository
 
     async findCategoryById(id) 
     {
-        let rawCategory = await this.knex.select('*').from('Type_product').where('id', id);
-
-        if(rawCategory.length) {
-            return this.factory(rawCategory[0]);
-        } 
-
-        return null;
+        let category = await this.knex.select('*').from('Type_product').where('id', id);
+        return category.length ? this.factory(category[0]) : null;
     }
 
     async add(data) 
     {
-        let addCategory = await this.knex('Type_product').insert(data);
-        return addCategory;
+        return await this.knex('Type_product').insert(data);
     }
 
     async update(data, id) 
     {
-        let updateCategory = await this.knex('Type_product').where('id', id).update(data);
-        return updateCategory;
+        return await this.knex('Type_product').where('id', id).update(data);
     }
 
     async delete(id) 
     {
-        let deleteCategory = await this.knex('Type_product').where('id', id).del();
-        return deleteCategory;
+        return await this.knex('Type_product').where('id', id).del();
     }
 
     factory(category) 
