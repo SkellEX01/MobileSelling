@@ -55,12 +55,7 @@ app.use(billDetailProvider(knex));
 app.use(customerProvider(knex));
 app.use(mailerProvider(config.mail));
 app.use(authProvider());
-app.use(braintreeProvider({
-    sandbox     : true,
-    merchantId  : process.env.BRAINTREE_MERCHANT_ID,
-    publicKey   : process.env.BRAINTREE_PUBLIC_KEY,
-    privateKey  : process.env.BRAINTREE_PRIVATE_KEY
-}));
+app.use(braintreeProvider(config.brainTree));
 app.use(routerLogin.routes());
 app.use(routerDashboard.routes());
 app.use(routeAdmin.routes());
