@@ -55,7 +55,7 @@ app.use(billDetailProvider(knex));
 app.use(customerProvider(knex));
 app.use(mailerProvider(config.mail));
 app.use(authProvider());
-app.use(braintreeProvider(config.brainTree));
+app.use(braintreeProvider(config.onlinePaymentGateway.brainTree));
 app.use(routerLogin.routes());
 app.use(routerDashboard.routes());
 app.use(routeAdmin.routes());
