@@ -15,5 +15,11 @@ module.exports = {
         destination: function(req, file, cb) {
             cb(null, './views/Admin/images/product');
         },
+    },
+    brainTree: {
+        sandbox     : true,
+        merchantId  : process.env.BRAINTREE_MERCHANT_ID,
+        publicKey   : process.env.BRAINTREE_PUBLIC_KEY,
+        privateKey  : process.env.BRAINTREE_PRIVATE_KEY
     }
 };
