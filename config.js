@@ -12,7 +12,7 @@ module.exports = {
         }
     },
     uploadFile: {
-        destination: function(req, file, cb) {
+        destination(req, file, cb) {
             cb(null, './views/Admin/images/product');
         },
     },
