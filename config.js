@@ -1,21 +1,65 @@
 require('dotenv').config();
 
 module.exports = {
-    database: require('./knexfile'),
+    database: {
+      development: {
+        client: 'mysql',
+        connection: {
+          host     : process.env.DB_HOST,
+          user     : process.env.DB_USER,
+          password : process.env.DB_PASS,
+          database : process.env.DB_NAME
+        }
+      },
+
+      staging: {
+        client: 'mysql',
+        connection: {
+          database  : 'my_db',
+          user      : 'username',
+          password  : 'password'
+        },
+        pool: {
+          min: 2,
+          max: 10
+        },
+        migrations: {
+          tableName: 'knex_migrations'
+        }
+      },
+
+      production: {
+        client: 'mysql',
+        connection: {
+          database  : 'my_db',
+          user      : 'username',
+          password  : 'password'
+        },
+        pool: {
+          min: 2,
+          max: 10
+        },
+        migrations: {
+          tableName: 'knex_migrations'
+        }
+      }
+    },
+    
     mail: {
         host: 'smtp.gmail.com',
         port: 587,
-        // secure: false, // true for 465, false for other ports
         auth: {
-            user: 'champion.sphinx@gmail.com', // generated ethereal user
-            pass: '1ccdd2cm' // generated ethereal password
+            user: 'champion.sphinx@gmail.com', 
+            pass: '1ccdd2cm' 
         }
     },
+    
     uploadFile: {
         destination(req, file, cb) {
             cb(null, './views/Admin/images/product');
         },
     },
+    
     onlinePaymentGateway: {
         brainTree: {
             sandbox     : true,
