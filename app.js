@@ -2,14 +2,12 @@ require('dotenv').config();
 const Koa                           = require('koa');
 const config                        = require('./config');
 const knex                          = require('knex')(config.database.development);
-const nunjuck                       = require('./nunjucks.provider');
-const routerLogin                   = require('./router/RouterLogin');
-const routeAdmin                    = require('./router/RouterAdmin');
 const loadStaticFile                = require('koa-static');
 const path                          = require('path');
 const bodyParser                    = require('koa-bodyparser');
 const session                       = require('koa-session');
 
+const nunjuck                       = require('./nunjucks.provider');
 const authProvider                  = require('./auth/Auth.Provider');
 const userProvider                  = require('./user/UserProvider');
 const hasherProvider                = require('./hasher/hasherProvider');
@@ -22,6 +20,9 @@ const onlinePaymentGatewayProvider  = require('./braintree/BraintreeProvider');
 const customerProvider              = require('./customer/Customer.provider');
 const mailerProvider                = require('./mailer/Mail.provider');
 const multerProvider                = require('./multer/Multer.provider');
+
+const routerLogin                   = require('./router/RouterLogin');
+const routeAdmin                    = require('./router/RouterAdmin');
 const routerDashboard               = require('./router/RouteDashboard');
 const routerCategory                = require('./router/RouterCategory');
 const routerProduct                 = require('./router/RouterProduct');
