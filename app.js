@@ -22,7 +22,7 @@ const mailerProvider                = require('./mailer/Mail.provider');
 const multerProvider                = require('./multer/Multer.provider');
 
 const routerLogin                   = require('./router/RouterLogin');
-const routeAdmin                    = require('./router/RouterAdmin');
+const routerAdmin                   = require('./router/RouterAdmin');
 const routerDashboard               = require('./router/RouteDashboard');
 const routerCategory                = require('./router/RouterCategory');
 const routerProduct                 = require('./router/RouterProduct');
@@ -59,7 +59,7 @@ app.use(customerProvider(knex));
 app.use(authProvider());
 app.use(routerLogin.routes());
 app.use(routerDashboard.routes());
-app.use(routeAdmin.routes());
+app.use(routerAdmin.routes());
 app.use(routerCategory.routes());
 app.use(routerProduct.routes());
 app.use(routerHomePage.routes());
